@@ -33,7 +33,7 @@ const Navbar = () => {
       {/* Desktop Navigation */}
       <ul className='hidden md:flex items-center font-bold  '>
         {navItems.map(item => (
-          <Link href={item.url}>
+          <Link href={"#"}>
             <li
             key={item.id}
             className='p-2 hover:bg-[#00df9a] rounded-xl m-2 cursor-pointer duration-300 hover:text-black'
