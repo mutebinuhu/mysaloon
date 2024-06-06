@@ -1,4 +1,6 @@
-import React from 'react';
+"use client"
+import Link from 'next/link';
+import React, { useEffect, useRef } from 'react';
 import { FaScissors } from "react-icons/fa6";
 
 const services = [
@@ -29,9 +31,39 @@ const services = [
 ];
 
 const OurServices = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            section.classList.add('animate-fadeIn');
+          } else {
+            section.classList.remove('animate-fadeIn');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (section) {
+      observer.observe(section);
+    }
+
+    return () => {
+      if (section) {
+        observer.unobserve(section);
+      }
+    };
+  }, []);
+
   return (
-    <div className="max-w-7xl mx-auto bg-[#0F0F0F] px-4 sm:px-6 lg:px-8 py-12">
-      <h2 className="text-3xl font-extrabold text-gray-300 text-center mb-8">Our Services</h2>
+    <div id="services" ref={sectionRef} className="max-w-7xl mx-auto bg-[#0F0F0F] px-4 sm:px-6 lg:px-8 py-12">
+                  <h2 className='text-4xl text-center md:text-6xl text-white font-bold md:text-left mb-4'>Our Services</h2>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service, index) => (
           <div key={index} className="p-6 bg-[#1F1F1F] rounded-lg shadow-md">
@@ -40,6 +72,11 @@ const OurServices = () => {
           </div>
         ))}
       </div>
+      <div className='text-center m-12 text-white'>
+      <Link href="#booknow" className='bg-[#D5A354] p-4 font-bold rounded px-6'>
+                    Schedule a Visit
+                </Link>
+    </div>
     </div>
   );
 };

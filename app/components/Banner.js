@@ -11,7 +11,7 @@ const Banner = () => {
                     Meet our experienced Barbers that will give You a perfect new look with the best customer care at affordable rates
                 </p>
                 <p className='py-2 tracking-wide text-white '>
-                    Get <span className='text-4xl'>90%</span> discount on first appointment
+                    Get <span className='text-4xl font-bold'>90%</span> discount on first appointment
                 </p>
                 <div className='text-center md:text-left my-4 '>
                 <Link href="#booknow" className='md:mr-2 bg-[#D6A354] text-white font-bold  py-3 rounded px-4 '>

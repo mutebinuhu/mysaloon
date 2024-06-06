@@ -6,6 +6,9 @@ import OurServices from "./components/OurServices";
 import OurTeam from "./components/OurTeam";
 import AppointmentSection from "./components/AppointementSection";
 import GallerySection from "./components/GallerySection";
+import AnimatedSection from "./components/AnimatedSection";
+import Testimonials from "@/components/Testimonials";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -16,6 +19,8 @@ export default function Home() {
      <OurTeam/>
      <AppointmentSection/>
      <GallerySection/>
+     <Testimonials/>
+     <Footer/>
     </main>
   );
 }

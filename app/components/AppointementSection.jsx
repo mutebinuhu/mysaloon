@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -24,12 +24,41 @@ const AppointmentSection = () => {
     console.log('Form data', values);
     // handle form submission
   };
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            section.classList.add('animate-fadeIn');
+          } else {
+            section.classList.remove('animate-fadeIn');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (section) {
+      observer.observe(section);
+    }
+
+    return () => {
+      if (section) {
+        observer.unobserve(section);
+      }
+    };
+  }, []);
 
   return (
-    <div id="booknow" className="relative bg-cover bg-center" style={{ backgroundImage: "url('barber-shop.jpg')" }}>
+    <div id="booknow" ref={sectionRef} className="relative bg-cover bg-center" style={{ backgroundImage: "url('barber-shop.jpg')" }}>
       <div className="bg-black bg-opacity-50 h-full md:flex items-center flex-row-reverse justify-between p-8">
         <div className="text-white max-w-lg">
-        <h2 className="text-4xl font-bold mb-4">Book Appointment</h2>
+        <h2 className='text-4xl text-center md:text-5xl text-white font-bold  mb-4'>Book Appointment</h2>
+
           <p className="text-lg mb-8">Get the best salon services at your convenience.</p>
         </div>
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">

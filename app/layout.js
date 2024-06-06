@@ -1,10 +1,10 @@
-import { Inter } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
 import Topheader from "./components/Topheader";
 
 
-const inter = Inter({ subsets: ["latin"] });
+const mont = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
   title: "My Saloon",
@@ -14,7 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body className={`${mont.className}`}>
         <div className="">
         <Topheader/>
         <Nav/>

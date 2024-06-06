@@ -1,12 +1,43 @@
+"use client"
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Card from './Card';
 
 const AboutUs = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+      const section = sectionRef.current;
+  
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              section.classList.add('animate-fadeIn');
+            } else {
+              section.classList.remove('animate-fadeIn');
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+  
+      if (section) {
+        observer.observe(section);
+      }
+  
+      return () => {
+        if (section) {
+          observer.unobserve(section);
+        }
+      };
+    }, []);
+  
     return (
-        <div className='bg-[#1F1F1F] container mx-auto space-between md:flex py-12 '>
+        <div  id="about-us" ref={sectionRef} className='bg-[#1F1F1F] container transition-opacity duration-1000 opacity- mx-auto space-between md:flex py-12 '>
             <section className='md:w-1/2 text-white/70 '>
-            <h1 className='text-4xl text-center md:text-6xl md:text-left '>About Us</h1>
+           
+            <h2 className='text-4xl text-center md:text-6xl text-white font-bold md:text-left '>About Us</h2>
             <p className='py-4'>
                 Welcome to [my Saloon]! At our salon, we believe in enhancing your natural beauty with a touch of luxury and style. Our talented team of professionals is dedicated to providing top-notch hair, skin, and nail services tailored to your unique needs. With a passion for the latest trends and techniques, we ensure every visit leaves you feeling refreshed and confident. Experience the perfect blend of relaxation and transformation at [My Saloon]—where your beauty is our priority.
             </p>

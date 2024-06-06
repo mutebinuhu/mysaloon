@@ -36,7 +36,7 @@ const Navbar = () => {
           <Link href={"#"}>
             <li
             key={item.id}
-            className='p-2 hover:bg-[#00df9a] rounded-xl m-2 cursor-pointer duration-300 hover:text-black'
+            className='p-2 hover:bg-[#D5A354] hover:text-white rounded-xl m-2 cursor-pointer duration-300 hover:text-black'
           >
             {item.text}
           </li>
@@ -64,13 +64,13 @@ const Navbar = () => {
         }
       >
         {/* Mobile Logo */}
-        <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>Logo</h1>
+        <h1 className='w-full text-3xl font-bold text-white m-4'>MySaloon</h1>
 
         {/* Mobile Navigation Items */}
         {navItems.map(item => (
           <li
             key={item.id}
-            className='p-4 border-b rounded-xl hover:bg-[#00df9a] duration-300 hover:text-black cursor-pointer border-gray-600'
+            className='p-4 border-b rounded-xl hover:bg-white hover:text-black duration-300 hover:text-black cursor-pointer border-gray-600'
           >
             {item.text}
           </li>

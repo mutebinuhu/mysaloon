@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const GallerySection = () => {
@@ -11,12 +12,12 @@ const GallerySection = () => {
   ];
 
   return (
+    <>
     <div className="py-12 bg-[#0F0F0F]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl font-extrabold text-white/70 sm:text-4xl">
-          Our Gallery
-        </h2>
-        <p className="mt-3 max-w-2xl mx-auto text-xl text-white/90 sm:mt-4">
+      <h2 className='text-4xl text-center md:text-6xl text-white font-bold md:text-left mb-4'>Our Gallery</h2>
+
+        <p className="mt-3 text-xl text-white/90 sm:mt-4 md:text-left ">
           Explore our recent work and the wonderful experiences of our clients.
         </p>
       </div>
@@ -37,7 +38,14 @@ const GallerySection = () => {
           </div>
         ))}
       </div>
+      <div className='text-center m-12 text-white'>
+      <Link href="#booknow" className='bg-[#D5A354] p-4 font-bold rounded px-6'>
+                    Schedule a Visit
+                </Link>
     </div>
+    </div>
+   
+    </>
   );
 };
 

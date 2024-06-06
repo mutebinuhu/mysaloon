@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const teamMembers = [
@@ -24,7 +25,8 @@ const teamMembers = [
 const OurTeam = () => {
   return (
     <div className="max-w-7xl bg-[#1F1F1F] mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h2 className="text-3xl font-extrabold text-white/80 text-center mb-8">Our Team</h2>
+                        <h2 className='text-4xl text-center md:text-6xl text-white font-bold md:text-left mb-4'>Our Team</h2>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamMembers.map((member, index) => (
          <div className='p-4 bg-[#0F0F0F] hover:bg-[#D5A354] text-white '>
@@ -45,6 +47,11 @@ const OurTeam = () => {
           
         ))}
       </div>
+      <div className='text-center m-12 text-white'>
+      <Link href="#booknow" className='bg-[#D5A354] p-4 font-bold rounded px-6'>
+                    Schedule a Visit
+                </Link>
+    </div>
     </div>
   );
 };
