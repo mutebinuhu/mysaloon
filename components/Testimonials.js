@@ -3,21 +3,21 @@ import React from 'react';
 
 const testimonials = [
   {
-    name: 'Jane Doe',
+    name: 'Mutebi Nuhu',
     feedback: 'Amazing service! My hair has never looked better.',
-    image: 'https://randomuser.me/api/portraits/women/1.jpg',
+    image: 'https://lh3.googleusercontent.com/a/ACg8ocKEk52PA6iU_4dPpA5jnf9MUC8Zz77Q3IQyCMbv8rRDFZY=s360-c-no',
     rating: 5,
   },
   {
-    name: 'John Smith',
+    name: 'Sarah',
     feedback: 'Very convenient and professional. Highly recommend!',
-    image: 'https://randomuser.me/api/portraits/men/1.jpg',
+    image: 'https://mojalove.pfunzo.online/api/web-admin/zimoja/images/750_63b3f2e49d06822329fb025d_lady_du_pic.jpg',
     rating: 4,
   },
   {
-    name: 'Alice Johnson',
+    name: 'Matovu Robert',
     feedback: 'The mobile salon came right to my doorstep. Fantastic experience!',
-    image: 'https://randomuser.me/api/portraits/women/2.jpg',
+    image: 'https://media.licdn.com/dms/image/D4D03AQGQZUsMKSfLcA/profile-displayphoto-shrink_400_400/0/1684170105538?e=1723075200&v=beta&t=2KL7TVZStythSc-zYNvjv8y_3jd_wY-AFpAhhyoayso',
     rating: 5,
   },
 ];
