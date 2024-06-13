@@ -10,15 +10,19 @@ export const metadata = {
   title: "My Saloon",
   description: "The No.1 Mobile Saloon",
 };
+const Main = () =>{
+  return(
+    <div className="">
+    <Topheader/>
+    <Nav/>
+    </div>
+  );
+}
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${mont.className}`}>
-        <div className="">
-        <Topheader/>
-        <Nav/>
-        </div>
         {children}
       </body>
     </html>

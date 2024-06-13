@@ -9,16 +9,21 @@ import GallerySection from "./components/GallerySection";
 import AnimatedSection from "./components/AnimatedSection";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
+import Topheader from "./components/Topheader";
 
 export default function Home() {
   return (
     <main className="">
+       <div className="">
+        <Topheader/>
+        <Nav/>
+      </div>
      <Banner/>
      <AboutUs/>
      <OurServices/>
      <OurTeam/>
      <AppointmentSection/>
-     <GallerySection/>
+     {/** <GallerySection/> */}
      <Testimonials/>
      <Footer/>
     </main>
