@@ -38,7 +38,7 @@ const Search = ()=>{
 const Profile = () =>{
     return(
         <div>
-            <FaRegUserCircle  className='w-14 h-14'/>
+            <FaRegUserCircle  className='w-12 h-12'/>
         </div>
     )
 }

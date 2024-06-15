@@ -50,7 +50,8 @@ function Page() {
 useEffect(()=>{
   const requests = async () =>{
     try {
-        console.log(process.env.API_URL+"========================= ");
+        console.log(process.env.NEXT_PUBLIC_API_URL+"========================= api url ");
+        console.log(process.env.NEXT_PUBLIC_MONGODB_URI+"========================= mongo db ");
       const data = await fetch(process.env.NEXT_PUBLIC_API_URL+"/api/requests")
       const response = await data.json();
       console.log("requests", response)
