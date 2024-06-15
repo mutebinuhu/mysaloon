@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaRegBell } from "react-icons/fa";
 import { FiMessageCircle } from "react-icons/fi";
+import { FaRegUserCircle } from "react-icons/fa";
+
 
 const Search = ()=>{
     return(
@@ -36,7 +38,7 @@ const Search = ()=>{
 const Profile = () =>{
     return(
         <div>
-            <img src='http://localhost:5173/src/images/user/user-01.png' className='w-14 h-14'/>
+            <FaRegUserCircle  className='w-14 h-14'/>
         </div>
     )
 }
@@ -44,8 +46,8 @@ const TopBar = () => {
     return (
         <nav className='drop-shadow-md bg-white mx-4 '>
             <div className='flex justify-between'>
-            <div>
-                <p>Search</p>
+            <div className='flex'>
+                <p className='mt-6 px-2'>Search</p>
             </div>
             <div className='w-1/5 p-2'>
                 <ul className='flex space-x-4 items-center'>

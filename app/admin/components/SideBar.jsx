@@ -41,7 +41,11 @@ const SideBar = () => {
         
         <FiAlignJustify className='text-2xl' onClick={() => setIsOpen(!isOpen)}/>
 
-        
+
+        <div className="mt-4">
+          {/* Your main content goes here */}
+          <h1 className="text-3xl font-bold">Welcome to the Salon Appointment System</h1>
+        </div>
       </div>
     </div>
   );

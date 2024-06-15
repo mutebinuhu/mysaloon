@@ -10,11 +10,11 @@ import { MdOutlinePeopleAlt } from "react-icons/md";
 import { TiCancel } from "react-icons/ti";
 import { GiConfirmed } from "react-icons/gi";
 import formatDate from '../../utils/formatDate';
+import Actions from './components/common/Actions';
 
 function Page() {
   const [count, setCount] = useState(0)
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const columns = [
     {
       name: 'Name',
@@ -28,23 +28,17 @@ function Page() {
       sortable: true,
 
     },
-    {
-      name: 'Preffered Date',
-      selector: row => row.prefferedDate,
-      sortable: true,
 
-    },
-    {
-      name: 'Preffered Time',
-      selector: row => row.prefferedTime,
-      sortable: true,
-
-    },
   
     {
       name: 'Created At',
       selector: row => formatDate(row.createdAt),
       sortable: true,
+
+    },
+    {
+      name: 'Action',
+      selector: row => <Actions/>,
 
     },
   ];
@@ -56,14 +50,13 @@ function Page() {
 useEffect(()=>{
   const requests = async () =>{
     try {
-       
+        console.log(process.env.API_URL+"========================= ");
       const data = await fetch(process.env.NEXT_PUBLIC_API_URL+"/api/requests")
-      //console.log
       const response = await data.json();
       console.log("requests", response)
       setData(response.data);
     } catch (error) {
-      console.log("error", error)
+      console.log("error", error.message)
     }
   }
   requests();
@@ -86,7 +79,7 @@ useEffect(()=>{
         </div>
        
 
-        <div className='mx-4 mt-4 bg-white'>
+        <div className='mx-4 mt-4 bg-white border drop-shadow-xl'>
           <div>
             <h2 className='p-4 text-bold text-gray-700'>Appointment Requests</h2>
           </div>

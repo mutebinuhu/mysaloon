@@ -13,7 +13,7 @@ import Topheader from "./components/Topheader";
 
 export default function Home() {
   return (
-    <main className="">
+    <main className="relative">
        <div className="">
         <Topheader/>
         <Nav/>
