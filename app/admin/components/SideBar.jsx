@@ -7,7 +7,7 @@ const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex">
+    <div className="flex h-full w-64 bg-red-300 fixed ">
       {/* Sidebar */}
       <Transition
         show={isOpen}
@@ -37,7 +37,7 @@ const SideBar = () => {
       </Transition>
       
       {/* Content */}
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-4 ">
         
         <FiAlignJustify className='text-2xl' onClick={() => setIsOpen(!isOpen)}/>
 

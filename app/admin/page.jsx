@@ -11,6 +11,7 @@ import { TiCancel } from "react-icons/ti";
 import { GiConfirmed } from "react-icons/gi";
 import formatDate from '../../utils/formatDate';
 import Actions from './components/common/Actions';
+import AppointmentDetails from './components/AppointmentDetails';
 
 function Page() {
   const [count, setCount] = useState(0)
@@ -37,12 +38,28 @@ function Page() {
 
     },
     {
+      name: 'Status',
+      selector: row => <span className={`${row.status == 'confirmed'  ? 'text-green-500' :'text-red-500'}`}>{row.status}</span>,
+      sortable: true,
+
+    },
+    {
       name: 'Action',
-      selector: row => <Actions/>,
+      selector: row => <Actions onView={()=>handleViewAppointment(row)}/>,
 
     },
   ];
-  
+
+  const [showAppointmentPage, setShowAppointmentPage] = useState(false);
+  const [details, setDetails] = useState({})
+  const handleViewAppointment = (row) =>{
+
+    setShowAppointmentPage(true)
+    setDetails(row)
+  }
+  const handleClick = () =>{
+    setShowAppointmentPage(false);
+  }
   const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
 
   
@@ -73,9 +90,9 @@ useEffect(()=>{
       <div>
         <div className='flex justify-between mt-4 mx-4 space-x-4'>
         <Counters statistics={data && data.length} text="Total Appointments" icon={<MdEventNote className='font-bold text-3xl text-purple-600'/>}/>
-        <Counters statistics={data && data.filter(data=>data.status=="confirmed").length} text="Confirmed Appointments" icon={<GiConfirmed className='font-bold text-3xl text-purple-600'/>}/>
-        <Counters statistics={data && data.filter(data=>data.status=="cancelled").length} text="Cancelled Appointments" icon={<TiCancel  className='font-bold text-3xl text-purple-600'/>}/>
-        <Counters statistics={100} text="Page  Visits" icon={<MdOutlinePeopleAlt className='font-bold text-3xl text-purple-600'/>}/>
+        <Counters statistics={data && data.filter(data=>data.status=="new request").length} text="New  Appointments" icon={<GiConfirmed className='font-bold text-3xl text-purple-600'/>}/>
+        <Counters statistics={data && data.filter(data=>data.status=="confirmed").length} text="Confirmed Appointments" icon={<TiCancel  className='font-bold text-3xl text-purple-600'/>}/>
+        <Counters statistics={data && data.filter(data=>data.status=="cancelled").length}  text="Cancelled Appointments" icon={<MdOutlinePeopleAlt className='font-bold text-3xl text-purple-600'/>}/>
 
         </div>
        
@@ -84,6 +101,7 @@ useEffect(()=>{
           <div>
             <h2 className='p-4 text-bold text-gray-700'>Appointment Requests</h2>
           </div>
+          <div className='relative h-full'>
           <DataTable
             columns={columns}
             data={data}
@@ -91,6 +109,12 @@ useEffect(()=>{
             pagination={2}
 
           />
+          {
+            showAppointmentPage && <div className='absolute inset-0'>
+            <AppointmentDetails appointment={details} handleClick={handleClick}/>
+            </div>
+          }
+          </div>
         </div>
         </div>
       
