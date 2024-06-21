@@ -24,7 +24,7 @@ const AppointmentSection = () => {
   });
 
   const onSubmit = async(values) => {
-    alert("we are here")
+
     console.log('Form data===', values);
     // handle form submission
     try {
