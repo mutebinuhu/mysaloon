@@ -7,11 +7,12 @@ const AppointmentDetails = ({ appointment, handleClick }) => {
     console.log("======appointment=======", appointment)
   return (
     <>
-    <div className="w-full h-full mx-auto bg-white p-6 bg-gray-900 bg-opacity-75 rounded-lg shadow-md" onClick={handleClick}>
+    <div className="w-full h-full mx-auto p-6 bg-gray-900 bg-opacity-75 rounded-lg shadow-md" onClick={handleClick}>
    
         <div>
-        <h1 className="text-2xl font-bold text-center mb-4">Appointment Details</h1>
         <div className='w-max-lg w-96 mx-auto bg-white rounded-lg shadow-md p-4'>
+        <h1 className="text-2xl font-bold text-center mb-4">Appointment Details</h1>
+
         <div className="mb-2">
         <span className="font-semibold">Customer Name:</span> {appointment.name}
       </div>
