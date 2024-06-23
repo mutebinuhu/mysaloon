@@ -8,8 +8,9 @@ export default async function handler(req, res) {
 
     switch (method) {
         case 'GET':
+
             try {
-                const requests = await Request.find({}).select('name phone service prefferedDate prefferedTime status createdAt');
+                const requests = await Request.find({}).select('name phone service prefferedDate prefferedTime status createdAt').sort({createdAt:-1});
                 res.status(200).json({ success: true, data: requests });
             } catch (error) {
                 res.status(400).json({ success: false });
@@ -17,6 +18,7 @@ export default async function handler(req, res) {
             break;
         case 'POST':
             try {
+
                 const request = await Request.create(req.body);
                 res.status(201).json({ success: true, data: request });
             } catch (error) {
@@ -24,6 +26,8 @@ export default async function handler(req, res) {
             }
             break;
         default:
+            console.log("PUTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
+
             res.status(400).json({ success: false });
             break;
     }

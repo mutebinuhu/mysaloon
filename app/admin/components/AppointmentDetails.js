@@ -1,13 +1,33 @@
 // src/components/AppointmentDetails.js
+import { Button } from '@/components/ui/button';
 import formatDate from '@/utils/formatDate';
 import { Transition } from '@headlessui/react';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 const AppointmentDetails = ({ appointment, handleClick }) => {
-    console.log("======appointment=======", appointment)
+  const router = useRouter();
+    const handleSubmit = async() =>{
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/requests/${appointment._id}`, {
+          method:'PUT',
+          headers:{
+            'Content-Type':'application/json',
+          },
+          body:JSON.stringify({
+            status:"approved"})
+        }
+      );
+        const data = await res.json();
+        
+
+      } catch (error) {
+        console.log("error", error.message)
+      }
+    }
   return (
     <>
-    <div className="w-full h-full mx-auto p-6 bg-gray-900 bg-opacity-75 rounded-lg shadow-md" onClick={handleClick}>
+    <div className="w-full h-full mx-auto p-6 bg-gray-900 bg-opacity-75 rounded-lg shadow-md">
    
         <div>
         <div className='w-max-lg w-96 mx-auto bg-white rounded-lg shadow-md p-4'>
@@ -37,7 +57,21 @@ const AppointmentDetails = ({ appointment, handleClick }) => {
       <div className="mb-2">
         <span className="font-semibold">Location:</span> {appointment.location}
       </div>
+      <div className="mb-2 w-full">
+       <form className='w-full' >
+        <div className='flex w-full space-x-4'>
+        <label className='font-semibold'>Approve</label>
+        <input type='checkbox' onClick={handleSubmit} className='p-4'/>
         </div>
+        </form>
+      </div>
+   <div className='text-right' onClick={handleClick}>
+   <Button color="secondary" className="bg-red-500">
+          close
+        </Button>
+   </div>
+        </div>
+        
         </div>
       
     </div>

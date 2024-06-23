@@ -30,6 +30,7 @@ export default async function handler(req, res) {
                 }
                 res.status(200).json({ success: true, data: request });
             } catch (error) {
+                console.log("error", error.message)
                 res.status(400).json({ success: false });
             }
             break;
@@ -45,6 +46,7 @@ export default async function handler(req, res) {
             }
             break;
         default:
+
             res.status(400).json({ success: false });
             break;
     }

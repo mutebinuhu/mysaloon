@@ -12,6 +12,7 @@ import { GiConfirmed } from "react-icons/gi";
 import formatDate from '../../utils/formatDate';
 import Actions from './components/common/Actions';
 import AppointmentDetails from './components/AppointmentDetails';
+import FilteredDataTable from './components/FilteredDataTable';
 
 function Page() {
   const [count, setCount] = useState(0)
@@ -102,18 +103,8 @@ useEffect(()=>{
             <h2 className='p-4 text-bold text-gray-700'>Appointment Requests</h2>
           </div>
           <div className='relative h-full'>
-          <DataTable
-            columns={columns}
-            data={data}
-            selectableRows
-            pagination={2}
-
-          />
-          {
-            showAppointmentPage && <div className='absolute inset-0'>
-            <AppointmentDetails appointment={details} handleClick={handleClick}/>
-            </div>
-          }
+            <FilteredDataTable data={data}/>
+      
           </div>
         </div>
         </div>

@@ -1,9 +1,11 @@
 "use client"
-import React, { useEffect, useRef } from 'react';
-import { Formik, Form, Field, ErrorMessage, resetForm } from 'formik';
+import React, { useEffect, useRef, useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 const AppointmentSection = () => {
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
   const initialValues = {
     name: '',
     phone: '',
@@ -20,11 +22,9 @@ const AppointmentSection = () => {
     prefferedDate: Yup.string().required('Required'),
     prefferedTime: Yup.string().required('Required'),
     //location: Yup.string().required('Required')
-
   });
 
-  const onSubmit = async(values) => {
-
+  const onSubmit = async (values, { resetForm }) => {
     console.log('Form data===', values);
     // handle form submission
     try {
@@ -33,15 +33,18 @@ const AppointmentSection = () => {
           headers:{
             'Content-Type':'application/json'
           },
-          body:JSON.stringify(values)
-        })
+          body: JSON.stringify(values)
+        });
         const data = await res.json();
-        console.log("data", data)
+        console.log("data", data);
+        resetForm();
+        setShowSuccessMessage(true);
+        setTimeout(() => setShowSuccessMessage(false), 3000); // Hide after 3 seconds
     } catch (error) {
-      console.log("an error when submitting", error)
+      console.log("an error occurred when submitting", error);
     }
-    resetForm();
   };
+
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -75,14 +78,19 @@ const AppointmentSection = () => {
     <div id="booknow" ref={sectionRef} className="relative bg-cover bg-center" style={{ backgroundImage: "url('barber-shop.jpg')" }}>
       <div className="bg-black bg-opacity-50 h-full md:flex items-center flex-row-reverse justify-between p-8">
         <div className="text-white max-w-lg">
-        <h2 className='text-4xl text-center md:text-5xl text-white font-bold  mb-4'>Book Appointment</h2>
-
+          <h2 className='text-4xl text-center md:text-5xl text-white font-bold mb-4'>Book Appointment</h2>
           <p className="text-lg mb-8">Get the best salon services at your convenience.</p>
         </div>
+        
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
           <h2 className="text-2xl font-bold mb-4">Appointment Details</h2>
           <p className="text-lg mb-8">Please fill out the form below to book your appointment.</p>
-          <Formik initialValues={initialValues}  validationSchema={validationSchema} onSubmit={onSubmit}>
+          {showSuccessMessage && (
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+              <span className="block sm:inline">Your appointment has been successfully booked!</span>
+            </div>
+          )}
+          <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             {({ errors, touched }) => (
               <Form className="space-y-4">
                 <div>
@@ -122,38 +130,38 @@ const AppointmentSection = () => {
                   <ErrorMessage name="service" component="div" className="text-red-500 text-sm" />
                 </div>
                 <div>
-                  <label htmlFor="date" className="block text-gray-700">Preferred Date</label>
+                  <label htmlFor="prefferedDate" className="block text-gray-700">Preferred Date</label>
                   <Field
                     type="date"
                     id="prefferedDate"
                     name="prefferedDate"
-                    className={`mt-1 block w-full border rounded py-2 px-3 ${errors.date && touched.date ? 'border-red-500' : 'border-gray-300'}`}
+                    className={`mt-1 block w-full border rounded py-2 px-3 ${errors.prefferedDate && touched.prefferedDate ? 'border-red-500' : 'border-gray-300'}`}
                   />
                   <ErrorMessage name="prefferedDate" component="div" className="text-red-500 text-sm" />
                 </div>
                 <div>
-                  <label htmlFor="time" className="block text-gray-700">Preferred Time</label>
+                  <label htmlFor="prefferedTime" className="block text-gray-700">Preferred Time</label>
                   <Field
                     type="time"
                     id="prefferedTime"
                     name="prefferedTime"
-                    className={`mt-1 block w-full border rounded py-2 px-3 ${errors.time && touched.time ? 'border-red-500' : 'border-gray-300'}`}
+                    className={`mt-1 block w-full border rounded py-2 px-3 ${errors.prefferedTime && touched.prefferedTime ? 'border-red-500' : 'border-gray-300'}`}
                   />
                   <ErrorMessage name="prefferedTime" component="div" className="text-red-500 text-sm" />
                 </div>
                 {/**<div>
-                  <label htmlFor="time" className="block text-gray-700">Location </label>
+                  <label htmlFor="location" className="block text-gray-700">Location </label>
                   <Field
                     type="text"
                     id="location"
                     name="location"
                     className={`mt-1 block w-full border rounded py-2 px-3 ${errors.location && touched.location ? 'border-red-500' : 'border-gray-300'}`}
                   />
-                  <ErrorMessage name="time" component="div" className="text-red-500 text-sm" />
+                  <ErrorMessage name="location" component="div" className="text-red-500 text-sm" />
                 </div>
-            **/}
-                <div>
-                  <button type="submit" className="bg-[#D5A354] w-full text-white py-2 px-4 rounded hover:[#E8A391]">Book Now</button>
+                **/}
+                <div className=''>
+                  <button type="submit" className="bg-[#D5A354] text-white py-2 px-4 rounded hover:bg-[#E8A391]">Book Now</button>
                 </div>
               </Form>
             )}

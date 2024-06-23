@@ -42,7 +42,7 @@ const AboutUs = () => {
                 Welcome to [my Saloon]! At our salon, we believe in enhancing your natural beauty with a touch of luxury and style. Our talented team of professionals is dedicated to providing top-notch hair, skin, and nail services tailored to your unique needs. With a passion for the latest trends and techniques, we ensure every visit leaves you feeling refreshed and confident. Experience the perfect blend of relaxation and transformation at [My Saloon]—where your beauty is our priority.
             </p>
             <div className='text-center md:text-left my-4 '>
-                <Link href="/contact-us" className='md:mr-2 bg-[#D5A354] text-white font-bold  py-3 rounded px-4 '>
+                <Link href="#booknow" className='md:mr-2 bg-[#D5A354] text-white font-bold  py-3 rounded px-4 '>
                     Book Your Visit Now
                 </Link>
                 
