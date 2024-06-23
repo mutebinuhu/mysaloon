@@ -19,6 +19,29 @@ const AppointmentDetails = ({ appointment, handleClick }) => {
         }
       );
         const data = await res.json();
+        if(data.success){
+          alert("Request Approved")
+        }
+
+      } catch (error) {
+        console.log("error", error.message)
+      }
+    }
+    const handleCancel = async() =>{
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/requests/${appointment._id}`, {
+          method:'PUT',
+          headers:{
+            'Content-Type':'application/json',
+          },
+          body:JSON.stringify({
+            status:"cancelled"})
+        }
+      );
+        const data = await res.json();
+        if(data.success){
+          alert("Request Cancelled")
+        }
         
 
       } catch (error) {
@@ -62,6 +85,8 @@ const AppointmentDetails = ({ appointment, handleClick }) => {
         <div className='flex w-full space-x-4'>
         <label className='font-semibold'>Approve</label>
         <input type='checkbox' onClick={handleSubmit} className='p-4'/>
+        <label className='font-semibold'>Cancel</label>
+        <input type='checkbox' onClick={handleCancel} className='p-4'/>
         </div>
         </form>
       </div>

@@ -92,7 +92,7 @@ const FilteredDataTable = ({ data }) => {
   }
   return (
     <div className="p-4">
-      <div className="mb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="mb-4 flex justify-between rounded bg-gray-100 p-4">
         <div>
           <label className="block mb-2 text-sm font-medium text-gray-700">
             Start Date:
