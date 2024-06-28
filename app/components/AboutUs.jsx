@@ -43,7 +43,7 @@ const AboutUs = () => {
             </p>
             <div className='text-center md:text-left my-4 '>
                 <Link href="#booknow" className='md:mr-2 bg-[#D5A354] text-white font-bold  py-3 rounded px-4 '>
-                    Book Your Visit Now
+                  Meet You Anywhere
                 </Link>
                 
                 </div>

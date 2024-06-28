@@ -39,7 +39,7 @@ const AppointmentSection = () => {
         console.log("data", data);
         resetForm();
         setShowSuccessMessage(true);
-        setTimeout(() => setShowSuccessMessage(false), 3000); // Hide after 3 seconds
+        setTimeout(() => setShowSuccessMessage(false), 5000); // Hide after 3 seconds
     } catch (error) {
       console.log("an error occurred when submitting", error);
     }
@@ -82,14 +82,15 @@ const AppointmentSection = () => {
           <p className="text-lg mb-8">Get the best salon services at your convenience.</p>
         </div>
         
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
+       {
+        showSuccessMessage ?   <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+        <span className="block sm:inline">Your appointment has been successfully booked!</span>
+      </div>:
+        <>
+         <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
           <h2 className="text-2xl font-bold mb-4">Appointment Details</h2>
           <p className="text-lg mb-8">Please fill out the form below to book your appointment.</p>
-          {showSuccessMessage && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
-              <span className="block sm:inline">Your appointment has been successfully booked!</span>
-            </div>
-          )}
+       
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             {({ errors, touched }) => (
               <Form className="space-y-4">
@@ -167,6 +168,8 @@ const AppointmentSection = () => {
             )}
           </Formik>
         </div>
+        </>
+       }
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ const Banner = () => {
                 </p>
                 <div className='text-center md:text-left my-4 '>
                 <Link href="#booknow" className='md:mr-2 bg-[#D6A354] text-white font-bold  py-3 rounded px-4 '>
-                    Book Now
+                Book In-Home Saloon
                 </Link>
                 
                 </div>

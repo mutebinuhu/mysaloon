@@ -7,7 +7,7 @@ const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex h-full w-64 bg-red-300 fixed ">
+    <div className="flex h-full w-64 bg-gray-800 text-white fixed ">
       {/* Sidebar */}
       <Transition
         show={isOpen}
@@ -22,10 +22,14 @@ const SideBar = () => {
           <h2 className="text-2xl font-bold">Salon Appointments</h2>
           <nav>
             <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Dashboard</a>
-            <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Appointments</a>
+            {
+              /**
+               * <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Appointments</a>
             <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Services</a>
             <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Customers</a>
             <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Settings</a>
+               */
+            }
           </nav>
           <button
           className="p-2 text-gray-800 bg-gray-200 rounded-md"

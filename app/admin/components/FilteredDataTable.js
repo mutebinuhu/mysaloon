@@ -166,6 +166,7 @@ const FilteredDataTable = ({ data }) => {
         columns={columns}
         data={filteredData}
         pagination
+        
         className="bg-white shadow-md rounded-lg"
       />
           

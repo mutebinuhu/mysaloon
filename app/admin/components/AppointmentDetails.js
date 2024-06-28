@@ -17,6 +17,7 @@ const AppointmentDetails = ({ appointment, handleClick }) => {
           body:JSON.stringify({
             status:"approved"})
         }
+        
       );
         const data = await res.json();
         if(data.success){

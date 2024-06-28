@@ -49,7 +49,8 @@ const Testimonials = () => {
         </div>
         <div className='text-center m-12 text-white'>
       <Link href="#booknow" className='bg-[#D5A354] p-4 font-bold rounded px-6'>
-                    Schedule a Visit
+      Schedule a Home Visit
+
                 </Link>
     </div>
       </div>
