@@ -49,7 +49,7 @@ const OurTeam = () => {
       </div>
       <div className='text-center m-12 text-white'>
       <Link href="#booknow" className='bg-[#D5A354] p-4 font-bold rounded px-6'>
-      Book Mobile Saloon Now 
+      Book Mobile Saloon 
                 </Link>
     </div>
     </div>
