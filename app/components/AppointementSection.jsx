@@ -21,7 +21,7 @@ const AppointmentSection = () => {
     service: Yup.string().required('Required'),
     prefferedDate: Yup.string().required('Required'),
     prefferedTime: Yup.string().required('Required'),
-    //location: Yup.string().required('Required')
+    location: Yup.string().required('Required')
   });
 
   const onSubmit = async (values, { resetForm }) => {
@@ -166,6 +166,17 @@ const AppointmentSection = () => {
                   <ErrorMessage name="location" component="div" className="text-red-500 text-sm" />
                 </div>
                 **/}
+                     <div>
+                  <label htmlFor="name" className="block text-gray-700">Location</label>
+                  <Field
+                    type="text"
+                    id="location"
+                    name="location"
+                    className={`mt-1 block w-full border rounded py-2 px-3 ${errors.location && touched.location ? 'border-red-500' : 'border-gray-300'}`}
+                  />
+                  <ErrorMessage name="location" component="div" className="text-red-500 text-sm" />
+
+                </div>
                 <div className=''>
                   <button type="submit" className="bg-[#D5A354] text-white py-2 px-4 rounded hover:bg-[#E8A391]">Book Now</button>
                 </div>

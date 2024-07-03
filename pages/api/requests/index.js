@@ -26,7 +26,6 @@ export default async function handler(req, res) {
             }
             break;
         default:
-            console.log("PUTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
 
             res.status(400).json({ success: false });
             break;

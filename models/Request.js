@@ -5,6 +5,9 @@ const requestsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    location:{
+        type: String 
+    },
     phone: {
         type: Number,
         required: true
