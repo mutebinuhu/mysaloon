@@ -6,6 +6,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 
 const AppointmentDetails = ({ appointment, handleClick }) => {
+  console.log("appp", appointment)
   const router = useRouter();
     const handleSubmit = async() =>{
       try {

@@ -28,7 +28,7 @@ const AppointmentSection = () => {
     console.log('Form data===', values);
     // handle form submission
     try {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_URL+"/api/requests", {
+        const res = await fetch(process.env.NEXT_PUBLIC_API_URL+"/api/requests/addrequest", {
           method: 'POST',
           headers:{
             'Content-Type':'application/json'

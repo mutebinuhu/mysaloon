@@ -1,6 +1,6 @@
 import dbConnect from '../../../lib/mongoose';
 import Request from '../../../models/Request';
-import authMiddleware from '../../../middleware/auth';
+
 
 const handler = async (req, res) => {
     const { method } = req;
@@ -8,15 +8,6 @@ const handler = async (req, res) => {
     await dbConnect();
 
     switch (method) {
-        case 'GET':
-
-            try {
-                const requests = await Request.find({}).select('name phone service prefferedDate prefferedTime status createdAt location').sort({createdAt:-1});
-                res.status(200).json({ success: true, data: requests });
-            } catch (error) {
-                res.status(400).json({ success: false });
-            }
-            break;
         case 'POST':
             try {
 
@@ -33,4 +24,4 @@ const handler = async (req, res) => {
     }
 }
 
-export default authMiddleware(handler);
+export default handler;

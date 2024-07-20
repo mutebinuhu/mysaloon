@@ -1,7 +1,9 @@
 import React from 'react';
-import { FaRegBell } from "react-icons/fa";
+import { FaPowerOff, FaRegBell } from "react-icons/fa";
 import { FiMessageCircle } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
+import { FaMessage } from 'react-icons/fa6';
+import TopAdminBar from './TopAdminBar';
 
 
 const Search = ()=>{
@@ -38,28 +40,14 @@ const Search = ()=>{
 const Profile = () =>{
     return(
         <div>
-            <FaRegUserCircle  className='w-12 h-12'/>
+            <FaRegUserCircle  className='w-8 h-8'/>
         </div>
     )
 }
 const TopBar = () => {
     return (
         <nav className='drop-shadow-md bg-white mx-4 '>
-            <div className='flex justify-between'>
-            <div className='flex'>
-                <p className='mt-6 px-2'>Search</p>
-            </div>
-            <div className='w-1/5 p-2'>
-                <ul className='flex space-x-4 items-center'>
-                    <li className='bg-gray-100 w-12 h-12 md:flex justify-center items-center rounded-full'><FaRegBell className='font-bold text-3xl text-purple-600' /></li>
-                    <li className='bg-gray-100 w-12 h-12 md:flex justify-center items-center rounded-full'><FiMessageCircle className='font-bold text-3xl text-purple-600' /></li>
-                    <li><Profile/></li>
-
-                </ul>
-
-              
-            </div>
-            </div>
+            <TopAdminBar/>
         </nav>
     );
 }
