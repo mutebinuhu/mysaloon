@@ -24,7 +24,7 @@ const TopAdminBar = () => {
           alt="Profile"
           className="w-10 h-10 rounded-full mr-4"
         />
-        <span>{localStorage.getItem('userdetails')}</span>
+        <span>{user}</span>
       </div>
       <div className="flex items-center">
         <button className="relative mr-4">

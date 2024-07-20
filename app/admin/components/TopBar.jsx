@@ -46,7 +46,7 @@ const Profile = () =>{
 }
 const TopBar = () => {
     return (
-        <nav className='drop-shadow-md bg-white '>
+        <nav className='drop-shadow-md bg-white mx-4 '>
             <TopAdminBar/>
         </nav>
     );
