@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 
 const Login = () => {
     const router = useRouter()
+    const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -19,6 +20,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true)
         const res = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {
@@ -30,16 +32,18 @@ const Login = () => {
         console.log("ress", data)
         
         if(data.message=='Login successful'){
+            setIsLoading(false)
             router.push('/admin')
 
         }
        
-          /*if(data.error){
+          if(data.error){
+            setIsLoading(false)
             setError('Error has Occured')
             setTimeout(()=>{
                 setError('')
             }, 3000)
-        }*/
+        }
        /* if (data.token) {
             localStorage.setItem('token', data.token);
             localStorage.setItem('userdetails', data.userdetails);
@@ -50,12 +54,14 @@ const Login = () => {
             console.error('Login failed:', data.error);
         }
             */
+        
     };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
                 <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+                {isLoading ? <p  className='text-gray-500 text-2xl text-bold'>Loading...</p> :""}
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {error && <p className='p-4 bg-red-500 text-white'>An Error has Ocurred</p>}
                     <div>
@@ -88,6 +94,7 @@ const Login = () => {
                     </div>
                     <div>
                         <button
+                            disabled={formData.email && formData.password ? false : true}
                             type="submit"
                             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >

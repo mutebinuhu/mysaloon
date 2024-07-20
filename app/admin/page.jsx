@@ -19,7 +19,7 @@ import { parseCookies } from 'nookies';
 
 function Page() {
   const [count, setCount] = useState(0)
-  const [authToken, setAuthToken] = useState(null);
+  const [authToken, setAuthToken] = useState("");
   const [data, setData] = useState([]);
   const [username, setUsername] = useState('');
   const router = useRouter();
@@ -73,29 +73,37 @@ function Page() {
   
 
 useEffect(()=>{
-
-  const requests = async () =>{
-    try {
-      
-      const data = await fetch(process.env.NEXT_PUBLIC_API_URL+"/api/requests", {
-        headers:{
-          'Authorization':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2ODhkZTMwMTEyMWVmOTA4ZjM3MzkyNSIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJGJCcEsxYUU5WWN2Wld6RDg2a2dQdS5VREdTQ3BUZTlETUEvWXhGQno3ck5ILk9rMUV1RmZlIiwicm9sZSI6InVzZXIiLCJfX3YiOjB9LCJpYXQiOjE3MjEzNjgwMDYsImV4cCI6MTcyMTM3MTYwNn0.MBIbHqDJrRj30yEylyBa7-Mgs-eLRNuKSg6nNuP_3TM"
+  const fetchUserDetails = async () => {
+    const response = await fetch('/api/authcookie');
+    if (response.ok) {
+      const res = await response.json();
+      setAuthToken(res.token);
+      try {
+          
+        const data = await fetch(process.env.NEXT_PUBLIC_API_URL+"/api/requests", {
+          headers:{
+            'Authorization':res.token
+          }
+        })
+        
+        
+        const response = await data.json();
+        
+        if(!response.success){
+          router.push('/login')
         }
-      })
-      
-      
-      const response = await data.json();
-      
-      console.log("requests", response)
-      if(!response.success){
-        router.push('/login')
+        setData(response.data);
+      } catch (error) {
       }
-      setData(response.data);
-    } catch (error) {
-      console.log("error", error.message)
+     
+      //console.log("tokennnn", authToken)
+    } else {
+      console.log('Error fetching user details');
     }
-  }
-  requests();
+  };
+
+  fetchUserDetails();
+ 
  
   const cookies = parseCookies();
 
