@@ -22,6 +22,8 @@ const SideBar = () => {
           <h2 className="text-2xl font-bold">Salon Appointments</h2>
           <nav>
             <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Dashboard</a>
+            <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Users</a>
+
             {
               /**
                * <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Appointments</a>
