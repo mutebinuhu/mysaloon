@@ -32,7 +32,7 @@ const Login = () => {
         console.log("ress", data)
         
         if(data.message=='Login successful'){
-            setIsLoading(false)
+          
             router.push('/admin')
 
         }
@@ -54,7 +54,7 @@ const Login = () => {
             console.error('Login failed:', data.error);
         }
             */
-        
+        setIsLoading(false)
     };
 
     return (

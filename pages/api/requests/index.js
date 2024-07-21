@@ -11,7 +11,7 @@ const handler = async (req, res) => {
         case 'GET':
 
             try {
-                const requests = await Request.find({}).select('name phone service prefferedDate prefferedTime status createdAt location').sort({createdAt:-1});
+                const requests = await Request.find({}).select('name phone service preferredDate preferredTime status createdAt location').sort({createdAt:-1});
                 res.status(200).json({ success: true, data: requests });
             } catch (error) {
                 res.status(400).json({ success: false });
@@ -19,7 +19,6 @@ const handler = async (req, res) => {
             break;
         case 'POST':
             try {
-
                 const request = await Request.create(req.body);
                 res.status(201).json({ success: true, data: request });
             } catch (error) {

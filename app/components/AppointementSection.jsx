@@ -5,27 +5,29 @@ import * as Yup from 'yup';
 
 const AppointmentSection = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const initialValues = {
     name: '',
     phone: '',
     service: '',
     location:'',
-    prefferedDate:'',
-    prefferedTime:''
+    preferredDate:'',
+    preferredTime:''
   };
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Required'),
     phone: Yup.string().required('Required'),
     service: Yup.string().required('Required'),
-    prefferedDate: Yup.string().required('Required'),
-    prefferedTime: Yup.string().required('Required'),
+    preferredDate: Yup.string().required('Required'),
+    preferredTime: Yup.string().required('Required'),
     location: Yup.string().required('Required')
   });
 
   const onSubmit = async (values, { resetForm }) => {
     console.log('Form data===', values);
+    setIsLoading(true)
     // handle form submission
     try {
         const res = await fetch(process.env.NEXT_PUBLIC_API_URL+"/api/requests/addrequest", {
@@ -42,7 +44,9 @@ const AppointmentSection = () => {
         setTimeout(() => setShowSuccessMessage(false), 3000); // Hide after 3 seconds
     } catch (error) {
       console.log("an error occurred when submitting", error);
+      setIsLoading(false)
     }
+    setIsLoading(false)
   };
 
   const sectionRef = useRef(null);
@@ -136,24 +140,25 @@ const AppointmentSection = () => {
                   <ErrorMessage name="service" component="div" className="text-red-500 text-sm" />
                 </div>
                 <div>
-                  <label htmlFor="prefferedDate" className="block text-gray-700">Preferred Date</label>
+                  <label htmlFor="preferredDate" className="block text-gray-700">Preferred Date</label>
                   <Field
+                  
                     type="date"
-                    id="prefferedDate"
-                    name="prefferedDate"
+                    id="preferredDate"
+                    name="preferredDate"
                     className={`mt-1 block w-full border rounded py-2 px-3 ${errors.prefferedDate && touched.prefferedDate ? 'border-red-500' : 'border-gray-300'}`}
                   />
-                  <ErrorMessage name="prefferedDate" component="div" className="text-red-500 text-sm" />
+                  <ErrorMessage name="preferredDate" component="div" className="text-red-500 text-sm" />
                 </div>
                 <div>
-                  <label htmlFor="prefferedTime" className="block text-gray-700">Preferred Time</label>
+                  <label htmlFor="preferredTime" className="block text-gray-700">Preferred Time</label>
                   <Field
                     type="time"
-                    id="prefferedTime"
-                    name="prefferedTime"
+                    id="preferredTime"
+                    name="preferredTime"
                     className={`mt-1 block w-full border rounded py-2 px-3 ${errors.prefferedTime && touched.prefferedTime ? 'border-red-500' : 'border-gray-300'}`}
                   />
-                  <ErrorMessage name="prefferedTime" component="div" className="text-red-500 text-sm" />
+                  <ErrorMessage name="preferredTime" component="div" className="text-red-500 text-sm" />
                 </div>
                 {/**<div>
                   <label htmlFor="location" className="block text-gray-700">Location </label>

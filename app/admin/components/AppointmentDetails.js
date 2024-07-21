@@ -65,10 +65,10 @@ const AppointmentDetails = ({ appointment, handleClick }) => {
         <span className="font-semibold">Service:</span> {appointment.service}
       </div>
       <div className="mb-2">
-        <span className="font-semibold">Created At:</span> {(formatDate(appointment.createdAt))}
+        <span className="font-semibold">Created At:</span> {(formatDate(appointment.createdAt, true))}
       </div>
       <div className="mb-2">
-        <span className="font-semibold">Preferred Date:</span> {appointment.preferredDate}
+        <span className="font-semibold">Preferred Date:</span> {formatDate(appointment.preferredDate)}
       </div>
       <div className="mb-2">
         <span className="font-semibold">Preferred Time:</span> {appointment.preferredTime}

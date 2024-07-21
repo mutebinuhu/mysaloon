@@ -15,6 +15,7 @@ import AppointmentDetails from './components/AppointmentDetails';
 import FilteredDataTable from './components/FilteredDataTable';
 import { useRouter } from 'next/navigation';
 import { parseCookies } from 'nookies';
+import Users from '@/components/Users';
 
 
 function Page() {
@@ -112,6 +113,8 @@ useEffect(()=>{
 }, [router])
   return (
     <>
+     <div>
+  
      <div className='flex'>
      <div className='w-1/4'>
         <SideBar/>
@@ -135,10 +138,14 @@ useEffect(()=>{
           <div className='relative h-full'>
             <FilteredDataTable data={data}/>
           </div>
+          <div>
+            <Users/>
+          </div>
         </div>
         </div>
       
       </div>
+     </div>
      </div>
      
     </>
