@@ -25,6 +25,16 @@ const requestsSchema = new mongoose.Schema({
     status: {
         type: String,
         default: "new request"
+    },
+    price:{
+        type:Number
+    },
+    isPaid:{
+        type: Boolean,
+        default: false
+    },
+    paymentAcceptedBy:{
+        type:String
     }
 }, {
     timestamps: true

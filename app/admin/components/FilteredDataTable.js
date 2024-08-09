@@ -11,6 +11,10 @@ const FilteredDataTable = ({ data }) => {
         setShowAppointmentPage(true)
         setDetails(row)
       }
+
+      const handlePayMent = (row) =>{
+        console.log("This is the payment Details", row );
+      }
     console.log("this is the entires data==============", data);
     const [showAppointmentPage, setShowAppointmentPage] = useState(false);
     const [details, setDetails] = useState({})
@@ -81,8 +85,15 @@ const FilteredDataTable = ({ data }) => {
 
     },
     {
+      name: 'Price',
+      selector: row =><div><span>{ row.price}</span>{row.isPaid ? <span className='mx-1 bg-red-500 p-2 rounded text-white'>PAID</span> :<button className='mx-1 bg-red-500 p-2 rounded text-white' onClick={()=>handlePayMent(row._id)}>PAY</button>}</div>,
+      sortable: true,
+
+    },
+
+    {
       name: 'Action',
-      selector: row => <Actions onView={()=>handleViewAppointment(row)}/>,
+      selector: row => <Actions  onView={()=>handleViewAppointment(row)}/>,
 
     },
   ];

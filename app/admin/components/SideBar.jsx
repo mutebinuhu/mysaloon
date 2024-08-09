@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 import { FiAlignJustify } from "react-icons/fi";
 
@@ -7,7 +8,7 @@ const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex h-full w-64 bg-gray-800 text-white fixed ">
+    <div className="flex h-full w-80 bg-gray-800 text-white fixed ">
       {/* Sidebar */}
       <Transition
         show={isOpen}
@@ -18,12 +19,12 @@ const SideBar = () => {
         leaveFrom="translate-x-0"
         leaveTo="-translate-x-full"
       >
-        <div className="fixed inset-y-0 left-0 bg-gray-800 text-white w-64 p-4 space-y-6">
-          <h2 className="text-2xl font-bold">Salon Appointments</h2>
+        <div className="fixed inset-y-0 left-0 bg-gray-800 text-white w-80 p-4 space-y-6">
+          <h2 className="text-2xl font-bold mt-12">Salon Appointments</h2>
           <nav>
-            <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Dashboard</a>
-            <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Users</a>
-
+            <a href="/admin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Dashboard</a>
+            <a href="/admin/services" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Services</a>
+            <a href="/admin/users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Users</a>
             {
               /**
                * <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Appointments</a>
@@ -48,7 +49,7 @@ const SideBar = () => {
         <FiAlignJustify className='text-2xl' onClick={() => setIsOpen(!isOpen)}/>
 
 
-        <div className="mt-4">
+        <div className="mt-4 ">
           {/* Your main content goes here */}
           <h1 className="text-3xl font-bold">Welcome to the Salon Appointment System</h1>
         </div>

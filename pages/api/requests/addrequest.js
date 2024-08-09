@@ -14,6 +14,7 @@ const handler = async (req, res) => {
                 const request = await Request.create(req.body);
                 res.status(201).json({ success: true, data: request });
             } catch (error) {
+                console.log("errr", error)
                 res.status(400).json({ success: false });
             }
             break;

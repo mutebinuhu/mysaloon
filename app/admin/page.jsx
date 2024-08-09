@@ -113,14 +113,10 @@ useEffect(()=>{
 }, [router])
   return (
     <>
-     <div>
   
-     <div className='flex'>
-     <div className='w-1/4'>
-        <SideBar/>
-      </div>
-      <div className='w-full'>
-          <TopBar/>
+     
+      <div className=''>
+        
       <div>
         <div className='flex justify-between mt-4 mx-4 space-x-4'>
         <Counters statistics={data && data.length} text="Total Appointments" icon={<MdEventNote className='font-bold text-3xl text-purple-600'/>}/>
@@ -145,8 +141,6 @@ useEffect(()=>{
         </div>
       
       </div>
-     </div>
-     </div>
      
     </>
   )

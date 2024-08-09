@@ -20,7 +20,7 @@ const TopAdminBar = () => {
     <div className="flex justify-between items-center p-4 bg-gray-800 text-white">
       <div className="flex items-center">
         <img
-          src="person+profile+user+icon-1320184018411209468.png"
+          src="/person+profile+user+icon-1320184018411209468.png"
           alt="Profile"
           className="w-10 h-10 rounded-full mr-4"
         />

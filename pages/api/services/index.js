@@ -1,28 +1,33 @@
+// app/api/services/route.js
 import dbConnect from '../../../lib/mongoose';
-import Request from '../../../models/Request';
+import Service from '@/models/Service';
+import { NextResponse } from 'next/server';
 import authMiddleware from '../../../middleware/auth';
-import User from '@/models/User';
 
 const handler = async (req, res) => {
-    const { method } = req;
+    const { method, body } = req;
 
     await dbConnect();
 
     switch (method) {
         case 'GET':
-            
+
             try {
-                const requests = await User.find({}).select('username email role').sort({createdAt:-1});
-                res.status(200).json({ success: true, data: requests });
+              const services = await Service.find({});
+              return res.status(200).json(services);
             } catch (error) {
                 res.status(400).json({ success: false });
             }
             break;
         case 'POST':
             try {
-                const request = await Request.create(req.body);
-                res.status(201).json({ success: true, data: request });
+              const body = await req.body
+              console.log("data", body)
+              const service = new Service(body);
+              await service.save();
+              return res.status(200).json(service);
             } catch (error) {
+                console.log("err", error.message)
                 res.status(400).json({ success: false });
             }
             break;
@@ -33,4 +38,5 @@ const handler = async (req, res) => {
     }
 }
 
-export default authMiddleware(handler);
+export default handler;
+

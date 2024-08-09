@@ -6,7 +6,46 @@ import * as Yup from 'yup';
 const AppointmentSection = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
+  const [price, setPrice] = useState("")
 
+  const services = [
+    { id:1, name: 'Haircut', price: 15000 },
+    { id:2,name: 'Manicure', price: 20000 },
+    { id:3,name: 'Pedicure', price: 25000 },
+    { id:4,name: 'Massage', price: 50000 },
+    { id:5,name: 'Facial', price: 40000 },
+    { id:6,name: 'Hair Coloring', price: 60000 },
+    { id:7,name: 'Waxing', price: 30000 },
+    { id:8,name: 'Shampoo and Blowdry', price: 10000 },
+    { id:9,name: 'Eyebrow Threading', price: 5000 },
+    { id:10,name: 'Hair Treatment', price: 70000 }
+  ];
+
+  
+  
+
+  
+  
+  
+
+
+  /*const getServices = async () => {
+    setIsLoading(true)
+    // handle form submission
+    try {
+        const res = await fetch(process.env.NEXT_PUBLIC_API_URL+"/api/services");
+        const data = await res.json();
+        console.log("data", data);
+        setServices(data)
+        setTimeout(() => setShowSuccessMessage(false), 3000); // Hide after 3 seconds
+    } catch (error) {
+      console.log("an error occurred when submitting", error);
+      setIsLoading(false)
+    }
+    setIsLoading(false)
+  };
+
+*/
   const initialValues = {
     name: '',
     phone: '',
@@ -27,7 +66,28 @@ const AppointmentSection = () => {
 
   const onSubmit = async (values, { resetForm }) => {
     console.log('Form data===', values);
+
+    const selectedService = services.find(service => service.id === parseInt(values.service));
+    if (selectedService) {
+      console.log("Selected service:", selectedService);
+    } else {
+      console.log("No service selected or invalid service ID");
+    }
+
+    const phone=  values.phone
+    const location = values.location
+    const name = values.name
+    const preferredDate = values.preferredDate
+    const preferredTime = values.preferredTime
+    const service = selectedService.name
+    const price = selectedService.price
+
+    let dataTosubmit = {
+      location,name,preferredTime, preferredDate, service, price, phone
+    }
+
     setIsLoading(true)
+  
     // handle form submission
     try {
         const res = await fetch(process.env.NEXT_PUBLIC_API_URL+"/api/requests/addrequest", {
@@ -35,10 +95,10 @@ const AppointmentSection = () => {
           headers:{
             'Content-Type':'application/json'
           },
-          body: JSON.stringify(values)
+          body: JSON.stringify(dataTosubmit)
         });
         const data = await res.json();
-        console.log("data", data);
+        console.log("services", data);
         resetForm();
         setShowSuccessMessage(true);
         setTimeout(() => setShowSuccessMessage(false), 3000); // Hide after 3 seconds
@@ -71,6 +131,7 @@ const AppointmentSection = () => {
       observer.observe(section);
     }
 
+    //getServices()
     return () => {
       if (section) {
         observer.unobserve(section);
@@ -126,16 +187,15 @@ const AppointmentSection = () => {
                 <div>
                   <label htmlFor="service" className="block text-gray-700">Service</label>
                   <Field
+
+               
                     as="select"
                     id="service"
                     name="service"
                     className={`mt-1 block w-full border rounded py-2 px-3 ${errors.service && touched.service ? 'border-red-500' : 'border-gray-300'}`}
                   >
                     <option value="" label="Select service" />
-                    <option value="haircut" label="Haircut" />
-                    <option value="manicure" label="Manicure" />
-                    <option value="pedicure" label="Pedicure" />
-                    <option value="facial" label="Facial" />
+                    {services.map((service, id)=><option key={id}   value={service.id}  label={service.name} />)}
                   </Field>
                   <ErrorMessage name="service" component="div" className="text-red-500 text-sm" />
                 </div>
