@@ -20,10 +20,11 @@ export default async function handler(req, res) {
             }
             break;
         case 'PUT':
+            console.log("im here", req.id)
             try {
                 const request = await Request.findByIdAndUpdate(id, req.body, {
                     new: true,
-                    runValidators: true,
+                    
                 });
                 if (!request) {
                     return res.status(404).json({ success: false });

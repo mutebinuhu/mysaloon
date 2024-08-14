@@ -4,16 +4,100 @@ import DataTable from 'react-data-table-component';
 import { format, parseISO, isWithinInterval } from 'date-fns';
 import Actions from './common/Actions';
 import AppointmentDetails from './AppointmentDetails';
+const UpdateForm = () => {
+  const [status, setStatus] = useState('');  // state to hold the selected option
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  const handleSelectChange = (event) => {
+    setStatus(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!status) {
+      alert("Please select an option before submitting.");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await axios.put('https://api.example.com/update-status', {
+        status: status,
+      });
+
+      if (response.status === 200) {
+        setSuccess("Status updated successfully!");
+      } else {
+        setError("Failed to update status. Please try again.");
+      }
+    } catch (err) {
+      setError("An error occurred while updating status. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <label htmlFor="status" className="block font-medium text-gray-700">
+          Update Status:
+        </label>
+        <select
+          id="status"
+          value={status}
+          onChange={handleSelectChange}
+          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          <option value="" disabled>Select an option</option>
+          <option value="approve">Approve</option>
+          <option value="cancel">Cancel</option>
+        </select>
+
+        <button
+          type="submit"
+          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          disabled={loading}
+        >
+          {loading ? "Updating..." : "Submit"}
+        </button>
+
+        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {success && <p className="text-green-500 mt-2">{success}</p>}
+      </form>
+    </div>
+  );
+};
 
 const FilteredDataTable = ({ data }) => {
+   
     const handleViewAppointment = (row) =>{
 
         setShowAppointmentPage(true)
         setDetails(row)
       }
 
-      const handlePayMent = (row) =>{
-        console.log("This is the payment Details", row );
+      const handlePayMent = async (row) =>{
+
+        try {
+          const data = await fetch("/api/requests/"+row, {
+            method:"PUT",
+            headers:{
+              'Content-Type':'application/json'
+            }, 
+            body:JSON.stringify({id:row, isPaid:true})
+          })
+          const res = await data.json();
+          console.log("response", res)
+        } catch (error) {
+            console.log("errr", error)
+        }
       }
     console.log("this is the entires data==============", data);
     const [showAppointmentPage, setShowAppointmentPage] = useState(false);
@@ -65,6 +149,13 @@ const FilteredDataTable = ({ data }) => {
 
     },
     {
+      name: 'Update ',
+      selector: row => <UpdateForm/>,
+      
+
+    },
+
+    {
       name: 'service',
       selector: row => row.service,
       sortable: true,
@@ -86,14 +177,14 @@ const FilteredDataTable = ({ data }) => {
     },
     {
       name: 'Price',
-      selector: row =><div><span>{ row.price}</span>{row.isPaid ? <span className='mx-1 bg-red-500 p-2 rounded text-white'>PAID</span> :<button className='mx-1 bg-red-500 p-2 rounded text-white' onClick={()=>handlePayMent(row._id)}>PAY</button>}</div>,
+      selector: row =><div><span>{ row.price}</span>{row.isPaid ? <span className='mx-1 bg-green-500 p-4 py-2 text-white'>PAID</span> :<button className='mx-1 bg-red-500 p-2 rounded text-white' onClick={()=>handlePayMent(row._id)}>PAY</button>}</div>,
       sortable: true,
 
     },
 
     {
       name: 'Action',
-      selector: row => <Actions  onView={()=>handleViewAppointment(row)}/>,
+      selector: row => <div className='flex h-full w-full justify-between items-center'><Actions   onView={()=>handleViewAppointment(row)}/></div>,
 
     },
   ];
