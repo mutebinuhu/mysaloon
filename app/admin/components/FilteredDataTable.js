@@ -4,7 +4,8 @@ import DataTable from 'react-data-table-component';
 import { format, parseISO, isWithinInterval } from 'date-fns';
 import Actions from './common/Actions';
 import AppointmentDetails from './AppointmentDetails';
-const UpdateForm = () => {
+import axios from 'axios';
+const UpdateForm = ({appointment}) => {
   const [status, setStatus] = useState('');  // state to hold the selected option
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -27,7 +28,7 @@ const UpdateForm = () => {
     setSuccess(null);
 
     try {
-      const response = await axios.put('https://api.example.com/update-status', {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/requests/${appointment._id}`, {
         status: status,
       });
 
@@ -37,6 +38,7 @@ const UpdateForm = () => {
         setError("Failed to update status. Please try again.");
       }
     } catch (err) {
+      console.log("err", err)
       setError("An error occurred while updating status. Please try again.");
     } finally {
       setLoading(false);
@@ -45,10 +47,7 @@ const UpdateForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <label htmlFor="status" className="block font-medium text-gray-700">
-          Update Status:
-        </label>
+      <form onSubmit={handleSubmit} className="space-y-4 ">
         <select
           id="status"
           value={status}
@@ -56,8 +55,8 @@ const UpdateForm = () => {
           className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
           <option value="" disabled>Select an option</option>
-          <option value="approve">Approve</option>
-          <option value="cancel">Cancel</option>
+          <option value="approved">Approve</option>
+          <option value="cancelled">Cancel</option>
         </select>
 
         <button
@@ -68,8 +67,8 @@ const UpdateForm = () => {
           {loading ? "Updating..." : "Submit"}
         </button>
 
-        {error && <p className="text-red-500 mt-2">{error}</p>}
-        {success && <p className="text-green-500 mt-2">{success}</p>}
+        {error && <p className="text-red-500 mt-2 w-12">{error}</p>}
+        {success && <p className="text-green-500 mt-2 w-12">{success}</p>}
       </form>
     </div>
   );
@@ -106,6 +105,10 @@ const FilteredDataTable = ({ data }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [isPaid, setIsPaid] = useState('');
+  const [total, setTotal ] = useState('');
+
+
   const [serviceFilter, setServiceFilter] = useState('');
   const [nameFilter, setNameFilter] = useState('');
 
@@ -132,13 +135,22 @@ const FilteredDataTable = ({ data }) => {
       filtered = filtered.filter(item => item.service == serviceFilter);
 
     }
+    if (isPaid) {
+
+      filtered = filtered.filter(item => item.isPaid == true);
+      setTotal(filtered.filter(item => item.isPaid == true).reduce((acc, curr)=>acc.price + curr))
+      setTotal(filtered.filter(item => item.isPaid == true).reduce((acc, curr)=>{
+        return acc + curr.price
+      }, 0))
+
+    }
 
     if (nameFilter) {
       filtered = filtered.filter(item => item.name.toLowerCase().includes(nameFilter.toLowerCase()));
     }
 
     setFilteredData(filtered);
-  }, [startDate, endDate, statusFilter, serviceFilter, nameFilter, data]);
+  }, [startDate, endDate, statusFilter, serviceFilter, nameFilter, isPaid,  data]);
 
 
   const columns = [
@@ -149,8 +161,8 @@ const FilteredDataTable = ({ data }) => {
 
     },
     {
-      name: 'Update ',
-      selector: row => <UpdateForm/>,
+      name: 'Approve ',
+      selector: row => <UpdateForm appointment={row}/>,
       
 
     },
@@ -193,7 +205,7 @@ const FilteredDataTable = ({ data }) => {
     setShowAppointmentPage(false);
   }
   return (
-    <div className="p-4">
+    <div className="p-4 ">
       <div className="mb-4 flex justify-between rounded bg-gray-100 p-4">
         <div>
           <label className="block mb-2 text-sm font-medium text-gray-700">
@@ -250,6 +262,19 @@ const FilteredDataTable = ({ data }) => {
           </select>
         </div>
         <div>
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Paid
+          </label>
+          <select
+            value={isPaid}
+            onChange={e => setIsPaid(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          >
+            <option value="">All</option>
+            <option value="true">Paid</option>
+          </select>
+        </div>
           <label className="block mb-2 text-sm font-medium text-gray-700">
             Name:
           </label>
@@ -269,7 +294,7 @@ const FilteredDataTable = ({ data }) => {
         data={filteredData}
         pagination
         
-        className="bg-white shadow-md rounded-lg"
+        className="bg-white shadow-md rounded-lg "
       />
           
           {
