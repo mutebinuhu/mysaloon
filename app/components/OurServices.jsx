@@ -61,23 +61,22 @@ const OurServices = () => {
   }, []);
 
   return (
-    <div id="services" ref={sectionRef} className="max-w-7xl mx-auto bg-[#0F0F0F] px-4 sm:px-6 lg:px-8 py-12">
-                  <h2 className='text-4xl text-center md:text-6xl text-white font-bold md:text-left mb-4'>Our Services</h2>
+    <div id="services" ref={sectionRef} className="max-w-full mx-auto bg-[#0F0F0F] px-4 sm:px-6 lg:px-8 py-12">
+      <h2 className="text-4xl  md:text-6xl text-white font-bold mb-4">Our Services</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service, index) => (
           <div key={index} className="p-6 bg-[#1F1F1F] rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold text-gray-300 mb-4"><span className='md:flex items-center'><FaScissors className='text-[#D5A354] md:mx-2'/>{service.title}</span></h3>
+            <h3 className="text-xl font-semibold text-gray-300 mb-4"><span className="md:flex items-center"><FaScissors className="text-[#D5A354] md:mx-2" />{service.title}</span></h3>
             <p className="text-gray-400">{service.description}</p>
           </div>
         ))}
       </div>
-      <div className='text-center m-12 text-white'>
-      <Link href="#booknow" className='bg-[#D5A354] p-4 font-bold rounded px-6'>
-                    Book Now
-                    
-                </Link>
-    </div>
+      <div className="text-center mt-12 text-white">
+        <Link href="#booknow" className="bg-[#D5A354] p-4 font-bold rounded px-6">
+          Book Now
+        </Link>
+      </div>
     </div>
   );
 };

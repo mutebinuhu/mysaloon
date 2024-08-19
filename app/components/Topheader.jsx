@@ -9,7 +9,7 @@ import { MdCall } from "react-icons/md";
 
 const Topheader = () => {
     return (
-        <header className='bg-[#D5A354] flex justify-between items-center container'>
+        <header className='bg-[#D5A354] flex justify-between items-center '>
             <section>
                 <ul className='flex items-center text-sm text-bold py-2'>
                     <li className='text-white'>

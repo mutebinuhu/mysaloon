@@ -24,7 +24,7 @@ const teamMembers = [
 
 const OurTeam = () => {
   return (
-    <div className="max-w-7xl bg-[#1F1F1F] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-full bg-[#1F1F1F] mx-auto px-4 sm:px-6 lg:px-8 py-12">
                         <h2 className='text-4xl text-center md:text-6xl text-white font-bold md:text-left mb-4'>Our Team</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
