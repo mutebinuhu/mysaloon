@@ -138,7 +138,7 @@ const FilteredDataTable = ({ data }) => {
     if (isPaid) {
 
       filtered = filtered.filter(item => item.isPaid == true);
-      setTotal(filtered.filter(item => item.isPaid == true).reduce((acc, curr)=>acc.price + curr))
+      //setTotal(filtered && filtered.filter(item => item.isPaid == true).reduce((acc, curr)=>acc.price + curr))
       setTotal(filtered.filter(item => item.isPaid == true).reduce((acc, curr)=>{
         return acc + curr.price
       }, 0))
@@ -206,6 +206,11 @@ const FilteredDataTable = ({ data }) => {
   }
   return (
     <div className="p-4 ">
+      <p className=''>  {startDate && endDate && total ? (
+    <>From {startDate} to {endDate} <span className='font-bold'>{total}</span> ugx was recorded</>
+  ) : (
+    ""
+  )}</p>
       <div className="mb-4 flex justify-between rounded bg-gray-100 p-4">
         <div>
           <label className="block mb-2 text-sm font-medium text-gray-700">
@@ -275,7 +280,8 @@ const FilteredDataTable = ({ data }) => {
             <option value="true">Paid</option>
           </select>
         </div>
-          <label className="block mb-2 text-sm font-medium text-gray-700">
+        <div>
+        <label className="block mb-2 text-sm font-medium text-gray-700">
             Name:
           </label>
           <input
@@ -285,6 +291,8 @@ const FilteredDataTable = ({ data }) => {
             placeholder="Search by name"
             className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           />
+        </div>
+          
         </div>
       </div>
       <div className='relative h-full'>

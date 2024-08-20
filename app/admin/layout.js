@@ -3,19 +3,22 @@ import TopBar from "./components/TopBar";
 
 export default function AdminLayout({ children }) {
     return (
-        <html>
-            <body className="flex flex-col h-screen">
-                <div className="sticky top-0 z-10">
+        <html className="h-full bg-gray-100">
+            <body className="h-full">
+                <div className="min-h-full">
                     <TopBar />
+                <header class="bg-white shadow">
+                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
                 </div>
-                <div className="flex flex-grow">
-                    <aside className="w-1/4 bg-gray-200">
-                        <SideBar />
-                    </aside>
-                    <main className="flex-grow">
+                </header>
+                    <main>
+                        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         {children}
+                        </div>
                     </main>
-                </div>
+
+                    </div>
             </body>
         </html>
     );
