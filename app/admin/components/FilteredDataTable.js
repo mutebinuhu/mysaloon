@@ -1,9 +1,13 @@
 // components/FilteredDataTable.js
+"use client"
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import { format, parseISO, isWithinInterval } from 'date-fns';
 import Actions from './common/Actions';
 import AppointmentDetails from './AppointmentDetails';
+
+import { useRouter } from 'next/navigation';
+
 import axios from 'axios';
 const UpdateForm = ({appointment}) => {
   const [status, setStatus] = useState('');  // state to hold the selected option
@@ -55,8 +59,13 @@ const UpdateForm = ({appointment}) => {
           className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
           <option value="" disabled>Select an option</option>
-          <option value="approved">Approve</option>
-          <option value="cancelled">Cancel</option>
+          {
+           appointment.isPaid ? "" : <>
+              <option value="approved">Approve</option>
+              <option value="cancelled">Cancel</option>
+           </> 
+          }
+      
         </select>
 
         <button
@@ -75,27 +84,29 @@ const UpdateForm = ({appointment}) => {
 };
 
 const FilteredDataTable = ({ data }) => {
-   
+   let router =useRouter()
     const handleViewAppointment = (row) =>{
 
         setShowAppointmentPage(true)
         setDetails(row)
       }
 
-      const handlePayMent = async (row) =>{
-
+      const handlePayMent = async (row) => {
         try {
-          const data = await fetch("/api/requests/"+row, {
-            method:"PUT",
-            headers:{
-              'Content-Type':'application/json'
-            }, 
-            body:JSON.stringify({id:row, isPaid:true})
-          })
+          const data = await fetch(`/api/requests/${row}`, {
+            method: "PUT",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: row, isPaid: true })
+          });
+    
           const res = await data.json();
-          console.log("response", res)
+          alert("Payment Made");
+          console.log("response", res);
+          router.push("/admin"); // Redirect after the update
         } catch (error) {
-            console.log("errr", error)
+          console.log("Error", error);
         }
       }
     console.log("this is the entires data==============", data);
@@ -189,7 +200,7 @@ const FilteredDataTable = ({ data }) => {
     },
     {
       name: 'Price',
-      selector: row =><div><span>{ row.price}</span>{row.isPaid ? <span className='mx-1 bg-green-500 p-4 py-2 text-white'>PAID</span> :<button className='mx-1 bg-red-500 p-2 rounded text-white' onClick={()=>handlePayMent(row._id)}>PAY</button>}</div>,
+      selector: row =><div><span>{ row.price}</span>{row.isPaid ? <span className={`mx-1 bg-green-500 p-4 py-2 text-white `}>PAID</span> :<button className={`mx-1 bg-red-500 p-2 rounded text-white ${row.status == 'new request' ? 'hidden':''}`} onClick={()=>handlePayMent(row._id)}>PAY</button>}</div>,
       sortable: true,
 
     },
@@ -263,6 +274,12 @@ const FilteredDataTable = ({ data }) => {
             <option value="manicure">Manicure</option>
             <option value="pedicure">Pedicure</option>
             <option value="facial">Facial</option>
+            <option value="Hair Coloring">Hair Coloring</option>
+            <option value="Waxing">Waxing</option>
+            <option value="Shampoo and Blowdry">Shampoo and Blowdry</option>
+            <option value="Eyebrow Threading">Eyebrow Threading</option>
+            <option value="Hair Treatment">Hair Treatment</option>
+
             {/* Add more services as needed */}
           </select>
         </div>

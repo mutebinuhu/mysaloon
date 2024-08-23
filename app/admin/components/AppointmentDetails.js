@@ -83,14 +83,7 @@ const AppointmentDetails = ({ appointment, handleClick }) => {
         <span className="font-semibold">Location:</span> {appointment.location}
       </div>
       <div className="mb-2 w-full">
-       <form className='w-full' >
-        <div className='flex w-full space-x-4'>
-        <label className='font-semibold'>Approve</label>
-        <input type='checkbox' onClick={handleSubmit} className='p-4'/>
-        <label className='font-semibold'>Cancel</label>
-        <input type='checkbox' onClick={handleCancel} className='p-4'/>
-        </div>
-        </form>
+       
       </div>
    <div className='text-right' onClick={handleClick}>
    <Button color="secondary" className="bg-red-500">

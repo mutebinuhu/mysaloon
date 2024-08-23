@@ -10,6 +10,7 @@ import AnimatedSection from "./components/AnimatedSection";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import Topheader from "./components/Topheader";
+import Contactus from "@/components/Contactus";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
      <AppointmentSection/>
      {/** <GallerySection/> */}
      <Testimonials/>
+     <Contactus/>
      <Footer/>
     </main>
   );
