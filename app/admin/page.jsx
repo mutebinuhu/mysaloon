@@ -131,7 +131,7 @@ useEffect(()=>{
           <div>
             <h2 className='p-4 text-bold text-gray-700'>Appointment Requests</h2>
           </div>
-          <div className='relative h-full'>
+          <div className=' h-full'>
             <FilteredDataTable data={data}/>
           </div>
           <div>
