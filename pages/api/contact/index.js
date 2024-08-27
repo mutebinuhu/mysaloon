@@ -4,7 +4,7 @@ import connectDB from "@/lib/mongoose";
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { name, email, message, phoneNumber } = req.body;
-    connectDB();
+    await connectDB();
 
     // Send mail
     try {
