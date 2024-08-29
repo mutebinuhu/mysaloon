@@ -26,6 +26,7 @@ function Page() {
   const [authToken, setAuthToken] = useState("");
   const [data, setData] = useState([]);
   const [username, setUsername] = useState('');
+  const [showAddUser, setShowAddUser] = useState(false)
   const router = useRouter();
 
   const columns = [
@@ -118,7 +119,7 @@ useEffect(()=>{
     <>
   
      
-      <div className=''>
+      <div className='relative'>
         
       <div>
         <div className='flex justify-between mt-4 mx-4 space-x-4'>
@@ -141,13 +142,19 @@ useEffect(()=>{
           </div>
       </Tab>
       <Tab key="2" title="Users" className="font-bold">
-        <div>
-          <AddUserForm/>
-          <div className='flex justify-end'>
-              <button className='bg-green-500 text-white p-4'>Add User</button>
-          </div>
-          <UserTable/>
-        </div>
+      <div className=''>
+  <div className='flex justify-end'>
+    <button className='bg-green-500 text-white p-4' onClick={() => setShowAddUser(true)}>
+      Add User
+    </button>
+  </div>
+  <div className='absolute inset-0 flex justify-center items-center z-40'>
+    {showAddUser && <AddUserForm />}
+  </div>
+  <UserTable />
+</div>
+
+        
       </Tab>
       
     </Tabs>
