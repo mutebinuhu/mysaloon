@@ -317,7 +317,7 @@ const FilteredDataTable = ({ data }) => {
       <DataTable
         columns={columns}
         data={filteredData}
-        pagination
+        pagination={5}
         
         className="bg-white shadow-md rounded-lg "
       />

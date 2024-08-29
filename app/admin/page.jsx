@@ -1,6 +1,8 @@
 "use client"
 import { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
+import { Tabs, Tab } from "@nextui-org/react";
+
 //import './App.css'
 import TopBar from './components/TopBar'
 import SideBar from './components/SideBar'
@@ -15,7 +17,8 @@ import AppointmentDetails from './components/AppointmentDetails';
 import FilteredDataTable from './components/FilteredDataTable';
 import { useRouter } from 'next/navigation';
 import { parseCookies } from 'nookies';
-import Users from '@/components/Users';
+import UserTable from '@/components/UserTable';
+import AddUserForm from './components/AddUserForm';
 
 
 function Page() {
@@ -125,18 +128,31 @@ useEffect(()=>{
         <Counters statistics={data && data.filter(data=>data.status=="cancelled").length}  text="Cancelled Appointments" icon={<MdOutlinePeopleAlt className='font-bold text-3xl text-purple-600'/>}/>
 
         </div>
-       
-
+        
         <div className='mx-4 mt-4 bg-white border drop-shadow-xl'>
-          <div>
+        <Tabs initialValue="1" animated={true}>
+      <Tab key="1" title="Appointment Requests">
+      <div>
             <h2 className='p-4 text-bold text-gray-700'>Appointment Requests</h2>
           </div>
+
           <div className=' h-full'>
             <FilteredDataTable data={data}/>
           </div>
-          <div>
-            <Users/>
+      </Tab>
+      <Tab key="2" title="Users" className="font-bold">
+        <div>
+          <AddUserForm/>
+          <div className='flex justify-end'>
+              <button className='bg-green-500 text-white p-4'>Add User</button>
           </div>
+          <UserTable/>
+        </div>
+      </Tab>
+      
+    </Tabs>
+
+          
         </div>
         </div>
       

@@ -20,10 +20,10 @@ const handler = async (req, res) => {
             break;
         case 'POST':
             try {
-                const request = await Request.create(req.body);
+                const request = await User.create(req.body);
                 res.status(201).json({ success: true, data: request });
             } catch (error) {
-                res.status(400).json({ success: false });
+                res.status(400).json({ success: false , error:error.message});
             }
             break;
         default:
@@ -33,4 +33,5 @@ const handler = async (req, res) => {
     }
 }
 
-export default authMiddleware(handler);
+//export default authMiddleware(handler);
+export default handler;
