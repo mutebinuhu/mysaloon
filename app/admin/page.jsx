@@ -148,8 +148,8 @@ useEffect(()=>{
       Add User
     </button>
   </div>
-  <div className='absolute inset-0 flex justify-center items-center z-40'>
-    {showAddUser && <AddUserForm />}
+  <div className='absolute right-0 h-32 w-1/4 flex justify-center items-center z-40'>
+    {showAddUser && <AddUserForm showForm={showAddUser} />}
   </div>
   <UserTable />
 </div>
@@ -164,6 +164,42 @@ useEffect(()=>{
         </div>
       
       </div>
+
+      <body>
+  <div class="flex flex-col h-screen">
+    <div class="bg-gray-800 text-white flex justify-between items-center p-4">
+      <h1 class="text-2xl font-bold">Dashboard</h1>
+      <div class="flex items-center space-x-4">
+        <img src="https://via.placeholder.com/40" alt="Profile" class="w-10 h-10 rounded-full" />
+        <button class="text-white hover:text-gray-300">Logout</button>
+      </div>
+    </div>
+
+    <div class="flex flex-1">
+      <nav class="bg-gray-800 text-white w-64">
+        <ul class="py-4">
+          <li class="px-4 py-2 hover:bg-gray-700">
+            <a href="#" class="block">Home</a>
+          </li>
+          <li class="px-4 py-2 hover:bg-gray-700">
+            <a href="#" class="block">About</a>
+          </li>
+          <li class="px-4 py-2 hover:bg-gray-700">
+            <a href="#" class="block">Services</a>
+          </li>
+          <li class="px-4 py-2 hover:bg-gray-700">
+            <a href="#" class="block">Contact</a>
+          </li>
+        </ul>
+      </nav>
+
+      <main class="flex-1 p-10 bg-gray-100">
+        <h1 class="text-3xl font-bold">Main Content</h1>
+        <p class="mt-4">This is the main content area.</p>
+      </main>
+    </div>
+  </div>
+</body>
      
     </>
   )

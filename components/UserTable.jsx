@@ -20,13 +20,13 @@ const columns = [
     sortable: true,
   },
   {
-    name: 'Actions',
-    cell: row => (
-      <div>
-        <Button auto color="primary" onClick={() => handleEdit(row.id)}>Edit</Button>
-        <Button auto color="error" onClick={() => handleDelete(row.id)}>Delete</Button>
-      </div>
-    ),
+    //name: 'Actions',
+    //cell: row => (
+      //<div>
+        //<Button auto color="primary" onClick={() => handleEdit(row.id)}>Edit</Button>
+        //<Button auto color="error" onClick={() => handleDelete(row.id)}>Delete</Button>
+      //</div>
+   // ),
     ignoreRowClick: true,
     allowOverflow: true,
     button: true,
