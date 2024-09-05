@@ -117,54 +117,6 @@ useEffect(()=>{
 }, [router])
   return (
     <>
-  
-     
-      <div className='relative'>
-        
-      <div>
-        <div className='flex justify-between mt-4 mx-4 space-x-4'>
-        <Counters statistics={data && data.length} text="Total Appointments" icon={<MdEventNote className='font-bold text-3xl text-purple-600'/>}/>
-        <Counters statistics={data && data.filter(data=>data.status=="new request").length} text="New  Appointments" icon={<GiConfirmed className='font-bold text-3xl text-purple-600'/>}/>
-        <Counters statistics={data && data.filter(data=>data.status=="confirmed").length} text="Confirmed Appointments" icon={<TiCancel  className='font-bold text-3xl text-purple-600'/>}/>
-        <Counters statistics={data && data.filter(data=>data.status=="cancelled").length}  text="Cancelled Appointments" icon={<MdOutlinePeopleAlt className='font-bold text-3xl text-purple-600'/>}/>
-
-        </div>
-        
-        <div className='mx-4 mt-4 bg-white border drop-shadow-xl'>
-        <Tabs initialValue="1" animated={true}>
-      <Tab key="1" title="Appointment Requests">
-      <div>
-            <h2 className='p-4 text-bold text-gray-700'>Appointment Requests</h2>
-          </div>
-
-          <div className=' h-full'>
-            <FilteredDataTable data={data}/>
-          </div>
-      </Tab>
-      <Tab key="2" title="Users" className="font-bold">
-      <div className=''>
-  <div className='flex justify-end'>
-    <button className='bg-green-500 text-white p-4' onClick={() => setShowAddUser(true)}>
-      Add User
-    </button>
-  </div>
-  <div className='absolute right-0 h-32 w-1/4 flex justify-center items-center z-40'>
-    {showAddUser && <AddUserForm showForm={showAddUser} />}
-  </div>
-  <UserTable />
-</div>
-
-        
-      </Tab>
-      
-    </Tabs>
-
-          
-        </div>
-        </div>
-      
-      </div>
-
       <body>
   <div class="flex flex-col h-screen">
     <div class="bg-gray-800 text-white flex justify-between items-center p-4">
@@ -182,20 +134,43 @@ useEffect(()=>{
             <a href="#" class="block">Home</a>
           </li>
           <li class="px-4 py-2 hover:bg-gray-700">
-            <a href="#" class="block">About</a>
+            <a href="#" class="block">Coming Soon</a>
           </li>
           <li class="px-4 py-2 hover:bg-gray-700">
-            <a href="#" class="block">Services</a>
+          <a href="#" class="block">Coming Soon</a>
+
           </li>
           <li class="px-4 py-2 hover:bg-gray-700">
-            <a href="#" class="block">Contact</a>
+          <a href="#" class="block">Coming Soon</a>
+
           </li>
         </ul>
       </nav>
 
-      <main class="flex-1 p-10 bg-gray-100">
-        <h1 class="text-3xl font-bold">Main Content</h1>
-        <p class="mt-4">This is the main content area.</p>
+      <main class="flex-1  bg-gray-100">
+      <div className='flex justify-between mt-4 mx-4 space-x-4'>
+        <Counters statistics={data && data.length} text="Total Appointments" icon={<MdEventNote className='font-bold text-3xl text-purple-600'/>}/>
+        <Counters statistics={data && data.filter(data=>data.status=="new request").length} text="New  Appointments" icon={<GiConfirmed className='font-bold text-3xl text-purple-600'/>}/>
+        <Counters statistics={data && data.filter(data=>data.status=="confirmed").length} text="Confirmed Appointments" icon={<TiCancel  className='font-bold text-3xl text-purple-600'/>}/>
+        <Counters statistics={data && data.filter(data=>data.status=="cancelled").length}  text="Cancelled Appointments" icon={<MdOutlinePeopleAlt className='font-bold text-3xl text-purple-600'/>}/>
+
+        </div>
+        <div>
+        <div className='bg-white  drop-shadow-xl my-12  mx-4 space-x-4 ' >
+          <div className='md:flex flex-col justify-between '>
+          
+          <div>
+          <div>
+            <h2 className='p-4 text-bold text-gray-700'>Appointment Requests</h2>
+          </div>
+
+          <div className=' h-full'>
+            <FilteredDataTable data={data}/>
+          </div>
+          </div>
+          </div>
+        </div>
+        </div>
       </main>
     </div>
   </div>
