@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import { Tabs, Tab } from "@nextui-org/react";
 
@@ -19,6 +19,8 @@ import { useRouter } from 'next/navigation';
 import { parseCookies } from 'nookies';
 import UserTable from '@/components/UserTable';
 import AddUserForm from './components/AddUserForm';
+import TopAdminBar from './components/TopAdminBar';
+import DashboardLoader from './DashboardLoader';
 
 
 function Page() {
@@ -113,39 +115,22 @@ useEffect(()=>{
   const cookies = parseCookies();
 
    setUsername( cookies.user)
+ 
 
 }, [router])
+if(!username){
   return (
-    <>
-      <body>
+    <DashboardLoader/>
+  )
+ }
+  return (
+ 
+    
   <div class="flex flex-col h-screen">
-    <div class="bg-gray-800 text-white flex justify-between items-center p-4">
-      <h1 class="text-2xl font-bold">Dashboard</h1>
-      <div class="flex items-center space-x-4">
-        <img src="https://via.placeholder.com/40" alt="Profile" class="w-10 h-10 rounded-full" />
-        <button class="text-white hover:text-gray-300">Logout</button>
-      </div>
-    </div>
+<TopAdminBar/>
 
     <div class="flex flex-1">
-      <nav class="bg-gray-800 text-white w-64">
-        <ul class="py-4">
-          <li class="px-4 py-2 hover:bg-gray-700">
-            <a href="#" class="block">Home</a>
-          </li>
-          <li class="px-4 py-2 hover:bg-gray-700">
-            <a href="#" class="block">Coming Soon</a>
-          </li>
-          <li class="px-4 py-2 hover:bg-gray-700">
-          <a href="#" class="block">Coming Soon</a>
-
-          </li>
-          <li class="px-4 py-2 hover:bg-gray-700">
-          <a href="#" class="block">Coming Soon</a>
-
-          </li>
-        </ul>
-      </nav>
+     <SideBar/>
 
       <main class="flex-1  bg-gray-100">
       <div className='flex justify-between mt-4 mx-4 space-x-4'>
@@ -174,9 +159,8 @@ useEffect(()=>{
       </main>
     </div>
   </div>
-</body>
-     
-    </>
+
+
   )
 }
 
