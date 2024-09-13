@@ -1,7 +1,7 @@
 "use client"
 import { use, useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
-import { Tabs, Tab } from "@nextui-org/react";
+
 
 //import './App.css'
 import TopBar from './components/TopBar'
@@ -21,12 +21,18 @@ import UserTable from '@/components/UserTable';
 import AddUserForm from './components/AddUserForm';
 import TopAdminBar from './components/TopAdminBar';
 import DashboardLoader from './DashboardLoader';
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+} from 'recharts';
 
+
+import {Tabs, Tab, Card, CardBody, CardHeader} from "@nextui-org/react";
 
 function Page() {
   const [count, setCount] = useState(0)
   const [authToken, setAuthToken] = useState("");
   const [data, setData] = useState([]);
+  const [paidClients, setpaidClients] = useState([]);
   const [username, setUsername] = useState('');
   const [showAddUser, setShowAddUser] = useState(false)
   const router = useRouter();
@@ -78,7 +84,14 @@ function Page() {
   const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
 
   
-
+  function getMonthNameFromDate(dateString) {
+    const date = new Date(dateString);
+    const monthName = date.toLocaleString('en-US', { month: 'long' });
+    return monthName;
+  }
+  
+  const dateString = "2024-08-21T05:42:03.702Z";
+  console.log(getMonthNameFromDate(dateString)); 
 useEffect(()=>{
   const fetchUserDetails = async () => {
     const response = await fetch('/api/authcookie');
@@ -95,12 +108,30 @@ useEffect(()=>{
         
         
         const response = await data.json();
+
+       
+        let newData = response.data.map((item)=>{
+
+            let createdData = getMonthNameFromDate(item.createdAt)
+
+            return {
+             ...item,
+              createdAt: createdData
+            }
+        });
+
+        console.log("newData", newData)
+;       
         
         if(!response.success){
           router.push('/login')
         }
         setData(response.data);
+  
+
+        
       } catch (error) {
+        console.log("errrors", error.message)
       }
      
       //console.log("tokennnn", authToken)
@@ -123,6 +154,74 @@ if(!username){
     <DashboardLoader/>
   )
  }
+
+ const TabsCard = () => {
+  let tabs = [
+    {
+      id: "appointments",
+      label: "Appointments",
+      content: <div className=' h-full'>
+                <FilteredDataTable data={data}/>
+              </div>
+    },
+    {
+      id: "users",
+      label: "Users",
+      content:<UserTable/>  
+    }
+  ];
+
+  return (
+    <div className="flex w-full flex-col">
+      <Tabs aria-label="Dynamic tabs" items={tabs} color="secondary" className='rounded'  >
+        {(item) => (
+          <Tab className='text-bold' key={item.id} title={item.label}>
+            <Card>
+              <CardBody>
+                {item.content}
+              </CardBody>
+            </Card>  
+          </Tab>
+        )}
+      </Tabs>
+    </div>  
+  );
+}
+const monthsData = [
+  { month: 'January', sales: 4000 },
+  { month: 'February', sales: 3000 },
+  { month: 'March', sales: 2000 },
+  { month: 'April', sales: 2780 },
+  { month: 'May', sales: 1890 },
+  { month: 'June', sales: 2390 },
+  { month: 'July', sales: 3490 },
+  { month: 'August', sales: 2000 },
+  { month: 'September', sales: 2780 },
+  { month: 'October', sales: 1890 },
+  { month: 'November', sales: 4000 },
+  { month: 'December', sales: 3000 },
+];
+
+const SalesBarChart = () => {
+  return (
+    <ResponsiveContainer width="100%" height={400}>
+      <BarChart
+        data={monthsData}
+        margin={{
+          top: 20, right: 30, left: 20, bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="month" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="sales" fill="#8884d8" />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+}
+
   return (
  
     
@@ -145,13 +244,9 @@ if(!username){
           <div className='md:flex flex-col justify-between '>
           
           <div>
-          <div>
-            <h2 className='p-4 text-bold text-gray-700'>Appointment Requests</h2>
-          </div>
-
-          <div className=' h-full'>
-            <FilteredDataTable data={data}/>
-          </div>
+           <SalesBarChart/>
+                 
+          <TabsCard/>
           </div>
           </div>
         </div>
@@ -159,8 +254,6 @@ if(!username){
       </main>
     </div>
   </div>
-
-
   )
 }
 
