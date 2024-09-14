@@ -244,7 +244,7 @@ const SalesBarChart = () => {
           <div className='md:flex flex-col justify-between '>
           
           <div>
-           <SalesBarChart/>
+          {/**  <SalesBarChart/> */}
                  
           <TabsCard/>
           </div>

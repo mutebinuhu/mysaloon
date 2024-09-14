@@ -9,7 +9,7 @@ const AddUserForm = ({showFormComponent}) => {
     password: '',
     confirmPassword: '',
   });
-  const [showForm, setShowForm] = useState(false);
+
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -50,7 +50,7 @@ const AddUserForm = ({showFormComponent}) => {
     if (Object.keys(formErrors).length === 0) {
       setIsSubmitting(true);
       try {
-        const response = await axios.post('http://localhost:3000/api/users', formData); // Replace with your API endpoint
+        const response = await axios.post('/api/users', formData); // Replace with your API endpoint
         console.log('User added:', response.data);
         // Handle success (e.g., show a success message, reset the form, etc.)
         setFormData({ username: '', email: '', role: '', password: '', confirmPassword: '' }); // Reset form
@@ -66,11 +66,13 @@ const AddUserForm = ({showFormComponent}) => {
   };
 
   return (
-    <div className="p-4  max-w-md mx-auto w-full bg-gray-500 rounded-lg shadow-md">
-      <h3 className="text-xl font-semibold mb-4 text-white">Add New User</h3>
-      <form onSubmit={handleSubmit}>
+    
+    <div className="p-4  max-w-md mx-auto w-full bg-gray-200 rounded-lg shadow-md">
+
+      <h3 className="text-xl font-semibold mb-4 text-gray-900">Add New User</h3>
+      <form onSubmit={handleSubmit} className=''>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-100">Name</label>
+          <label className="block text-sm font-medium text-gray-900">Name</label>
           <input
             type="text"
             name="username"
@@ -84,7 +86,7 @@ const AddUserForm = ({showFormComponent}) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-100">Email</label>
+          <label className="block text-sm font-medium text-gray-900">Email</label>
           <input
             type="email"
             name="email"
@@ -98,7 +100,7 @@ const AddUserForm = ({showFormComponent}) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-100">Role</label>
+          <label className="block text-sm font-medium text-gray-900">Role</label>
           <select
             name="role"
             value={formData.role}
@@ -118,7 +120,7 @@ const AddUserForm = ({showFormComponent}) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-100">Password</label>
+          <label className="block text-sm font-medium text-gray-900">Password</label>
           <input
             type="password"
             name="password"
@@ -132,7 +134,7 @@ const AddUserForm = ({showFormComponent}) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-100">Confirm Password</label>
+          <label className="block text-sm font-medium text-gray-900">Confirm Password</label>
           <input
             type="password"
             name="confirmPassword"
@@ -147,7 +149,7 @@ const AddUserForm = ({showFormComponent}) => {
 
         <button
           type="submit"
-          className={`w-full px-4 py-2 text-white bg-indigo-500 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+          className={`w-full px-4 py-2 text-white bg-green-500 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
             isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           disabled={isSubmitting}

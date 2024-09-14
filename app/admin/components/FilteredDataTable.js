@@ -149,10 +149,10 @@ const FilteredDataTable = ({ data }) => {
     if (isPaid) {
 
       filtered = filtered.filter(item => item.isPaid == true);
-      //setTotal(filtered && filtered.filter(item => item.isPaid == true).reduce((acc, curr)=>acc.price + curr))
-      setTotal(filtered.filter(item => item.isPaid == true).reduce((acc, curr)=>{
-        return acc + curr.price
-      }, 0))
+      setTotal(filtered && filtered.filter(item => item.isPaid == true).reduce((acc, curr)=>acc.price + curr))
+     // setTotal(filtered.filter(item => item.isPaid == true).reduce((acc, curr)=>{
+       // return acc + curr.price
+      //}, 0))
 
     }
 
